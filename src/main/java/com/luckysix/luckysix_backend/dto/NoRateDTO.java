@@ -9,12 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class LatestDrawsDTO {
-    private int round;
-    private int no1;
-    private int no2;
-    private int no3;
-    private int no4;
-    private int no5;
-    private int no6;
+public class NoRateDTO {
+    private int no;
+    private float rate;
 }
