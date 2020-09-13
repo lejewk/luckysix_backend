@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class NoRateDTO {
+public class NoDrawRateDTO {
     private int no;
+    private int count;
     private float rate;
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +19,8 @@ public class DhLotteryRaw {
     @Id
     @Column(name = "round")
     private int round;
+    @Column(name = "draw_date")
+    private LocalDate draw_date;
     @Column(name = "no_1")
     private int no1;
     @Column(name = "no_2")
