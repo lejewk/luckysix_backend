@@ -1,7 +1,7 @@
 package com.luckysix.luckysix_backend.service;
 
 import com.luckysix.luckysix_backend.domain.DhLotteryRaw;
-import com.luckysix.luckysix_backend.dto.NoDrawRateDTO;
+import com.luckysix.luckysix_backend.dto.DrawRateDTO;
 import com.luckysix.luckysix_backend.dto.StatisticsDTO;
 import com.luckysix.luckysix_backend.repository.DhLotteryRawRepository;
 import com.luckysix.luckysix_backend.util.UtilSorter;
@@ -10,9 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.stream.Stream;
 
 @Service
 public class StatisticsService {
@@ -51,9 +49,9 @@ public class StatisticsService {
 
         UtilSorter.sortByDrawCount(counter);
 
-        ArrayList<NoDrawRateDTO> noDrawRateDTOS = new ArrayList<>();
+        ArrayList<DrawRateDTO> noDrawRateDTOS = new ArrayList<>();
         for (int i=0; i<topLimit; i++) {
-            noDrawRateDTOS.add(NoDrawRateDTO.builder()
+            noDrawRateDTOS.add(DrawRateDTO.builder()
                 .no(counter[i][0])
                 .count(counter[i][1])
                 .rate((float) counter[i][1] / (float) totalRound)
