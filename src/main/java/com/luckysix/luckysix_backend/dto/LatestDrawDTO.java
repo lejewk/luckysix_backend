@@ -17,4 +17,5 @@ public class LatestDrawDTO {
     private int no4;
     private int no5;
     private int no6;
+    private int bonus;
 }

@@ -25,6 +25,7 @@ public class DrawService {
             .no4(dhLotteryRaw.getNo4())
             .no5(dhLotteryRaw.getNo5())
             .no6(dhLotteryRaw.getNo6())
+            .bonus(dhLotteryRaw.getBonusNo())
             .build();
     }
 }
