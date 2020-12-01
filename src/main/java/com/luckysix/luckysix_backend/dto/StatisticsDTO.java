@@ -12,5 +12,5 @@ import java.util.ArrayList;
 @Data
 @Builder
 public class StatisticsDTO {
-    private ArrayList<DrawRateDTO> noDrawRates;
+    private ArrayList<DrawRateDTO> drawRates;
 }

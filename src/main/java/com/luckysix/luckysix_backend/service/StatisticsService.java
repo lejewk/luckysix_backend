@@ -9,20 +9,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class StatisticsService {
+    private ArrayList<DrawRateDTO> noDrawRateDTOS;
     private DhLotteryRawRepository dhLotteryRawRepository;
 
     @Autowired
     public StatisticsService(DhLotteryRawRepository dhLotteryRawRepository) {
         this.dhLotteryRawRepository = dhLotteryRawRepository;
+        this.computeAllNoDrawRate();
     }
 
-    @Cacheable(value = "getSortedNoDrawRate")
-    public StatisticsDTO getSortedNoDrawRate(int topLimit) {
+    /**
+     * 전체 번호를 조회하여 통계후 메모리 등록
+     */
+    private void computeAllNoDrawRate() {
         Iterator<DhLotteryRaw> itr = dhLotteryRawRepository.findAll().iterator();
 
         int[][] counter = new int[45][3];
@@ -47,17 +52,34 @@ public class StatisticsService {
             totalRound++;
         }
 
-        UtilSorter.sortByDrawCount(counter);
-
-        ArrayList<DrawRateDTO> noDrawRateDTOS = new ArrayList<>();
-        for (int i=0; i<topLimit; i++) {
+        this.noDrawRateDTOS = new ArrayList<>();
+        for (int[] ints : counter) {
             noDrawRateDTOS.add(DrawRateDTO.builder()
-                .no(counter[i][0])
-                .count(counter[i][1])
-                .rate((float) counter[i][1] / (float) totalRound)
+                .no(ints[0])
+                .count(ints[1])
+                .rate((float) ints[1] / (float) totalRound)
                 .build());
         }
+    }
 
-        return StatisticsDTO.builder().noDrawRates(noDrawRateDTOS).build();
+    @Cacheable(value = "top6DrawRates")
+    public StatisticsDTO top6DrawRates() {
+        return StatisticsDTO.builder()
+            .drawRates(
+                this.noDrawRateDTOS.stream()
+                    .sorted(Comparator.comparing(DrawRateDTO::getCount).reversed())
+                    .limit(6)
+                    .collect(Collectors.toCollection(ArrayList::new)))
+            .build();
+    }
+
+    public StatisticsDTO drawRate(List<Integer> nos) {
+        return StatisticsDTO.builder()
+            .drawRates(
+                this.noDrawRateDTOS.stream()
+                    .filter(drawRateDTO -> Optional.ofNullable(nos).isPresent() && nos.contains(drawRateDTO.getNo()))
+                    .sorted(Comparator.comparing(DrawRateDTO::getCount).reversed())
+                    .collect(Collectors.toCollection(ArrayList::new)))
+            .build();
     }
 }
