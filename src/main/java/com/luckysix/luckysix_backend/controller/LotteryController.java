@@ -26,7 +26,7 @@ public class LotteryController {
 
     @GetMapping("/latestDraw")
     public LatestDrawDTO latestDraw() {
-        return drawService.getLatestDraw();
+        return drawService.latestDraw();
     }
 
     @GetMapping("/top6DrawRate")

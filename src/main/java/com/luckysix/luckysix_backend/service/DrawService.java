@@ -15,7 +15,7 @@ public class DrawService {
         this.dhLotteryRawRepository = dhLotteryRawRepository;
     }
 
-    public LatestDrawDTO getLatestDraw() {
+    public LatestDrawDTO latestDraw() {
         DhLotteryRaw dhLotteryRaw = dhLotteryRawRepository.findTopByOrderByRoundDesc();
         return LatestDrawDTO.builder()
             .round(dhLotteryRaw.getRound())
