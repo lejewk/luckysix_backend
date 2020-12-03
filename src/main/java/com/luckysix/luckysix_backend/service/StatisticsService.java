@@ -78,7 +78,7 @@ public class StatisticsService {
             .drawRates(
                 this.noDrawRateDTOS.stream()
                     .filter(drawRateDTO -> Optional.ofNullable(nos).isPresent() && nos.contains(drawRateDTO.getNo()))
-                    .sorted(Comparator.comparing(DrawRateDTO::getCount).reversed())
+                    .sorted(Comparator.comparing(DrawRateDTO::getNo))
                     .collect(Collectors.toCollection(ArrayList::new)))
             .build();
     }
