@@ -41,6 +41,6 @@ public class LotteryController {
 
     @GetMapping("/rank")
     public StatisticsDTO rank() {
-        return statisticsService.
+        return statisticsService.allDrawRate();
     }
 }

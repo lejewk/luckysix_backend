@@ -57,7 +57,7 @@ public class StatisticsService {
             noDrawRateDTOS.add(DrawRateDTO.builder()
                 .no(ints[0])
                 .count(ints[1])
-                .rate((float) ints[1] / (float) totalRound)
+                .rate(Math.round(((float) ints[1] / (float) totalRound) * 10000)/100.00f)
                 .build());
         }
     }
@@ -82,8 +82,8 @@ public class StatisticsService {
                     .collect(Collectors.toCollection(ArrayList::new)))
             .build();
     }
-    
-        public StatisticsDTO allDrawRate() {
+
+    public StatisticsDTO allDrawRate() {
         return StatisticsDTO.builder()
             .drawRates(
                 this.noDrawRateDTOS.stream()
