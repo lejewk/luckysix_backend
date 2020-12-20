@@ -38,4 +38,9 @@ public class LotteryController {
     public StatisticsDTO drawRate(@RequestParam("nos") List<Integer> nos) {
         return statisticsService.drawRate(nos);
     }
+
+    @GetMapping("/rank")
+    public StatisticsDTO rank() {
+        return statisticsService.
+    }
 }

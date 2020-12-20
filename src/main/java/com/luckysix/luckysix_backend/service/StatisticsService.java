@@ -82,4 +82,14 @@ public class StatisticsService {
                     .collect(Collectors.toCollection(ArrayList::new)))
             .build();
     }
+    
+        public StatisticsDTO allDrawRate() {
+        return StatisticsDTO.builder()
+            .drawRates(
+                this.noDrawRateDTOS.stream()
+                .sorted(Comparator.comparing(DrawRateDTO::getCount).reversed())
+                .collect(Collectors.toCollection(ArrayList::new))
+            )
+            .build();
+    }
 }
