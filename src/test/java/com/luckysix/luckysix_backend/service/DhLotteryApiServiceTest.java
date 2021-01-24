@@ -2,9 +2,7 @@ package com.luckysix.luckysix_backend.service;
 
 import com.luckysix.luckysix_backend.domain.DhLotteryRaw;
 import com.luckysix.luckysix_backend.repository.DhLotteryRawRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,12 +23,5 @@ class DhLotteryApiServiceTest {
             .when(dhLotteryRawRepository.save(Mockito.any(DhLotteryRaw.class)))
             .thenReturn(null);
         dhLotteryApiService = new DhLotteryApiService(this.dhLotteryRawRepository);
-    }
-
-    @Test
-    void testCollectAllDraws() {
-        int count = this.dhLotteryApiService.collectAllDraws();
-        Assertions.assertTrue(count >= 0);
-        System.out.println(count);
     }
 }
