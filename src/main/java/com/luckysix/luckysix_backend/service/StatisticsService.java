@@ -4,14 +4,12 @@ import com.luckysix.luckysix_backend.domain.DhLotteryRaw;
 import com.luckysix.luckysix_backend.dto.DrawRateDTO;
 import com.luckysix.luckysix_backend.dto.StatisticsDTO;
 import com.luckysix.luckysix_backend.repository.DhLotteryRawRepository;
-import com.luckysix.luckysix_backend.util.UtilSorter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class StatisticsService {

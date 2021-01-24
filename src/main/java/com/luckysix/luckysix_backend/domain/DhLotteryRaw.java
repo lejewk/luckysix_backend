@@ -20,7 +20,7 @@ public class DhLotteryRaw {
     @Column(name = "round")
     private int round;
     @Column(name = "draw_date")
-    private LocalDate draw_date;
+    private LocalDate drawDate;
     @Column(name = "no_1")
     private int no1;
     @Column(name = "no_2")
